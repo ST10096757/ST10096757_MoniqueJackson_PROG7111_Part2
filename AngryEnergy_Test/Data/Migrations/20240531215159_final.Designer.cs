@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngryEnergy_Test.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240530213935_ProductModelUpdate")]
-    partial class ProductModelUpdate
+    [Migration("20240531215159_final")]
+    partial class final
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,7 +60,7 @@ namespace AngryEnergy_Test.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<Guid>("FarmerModelID")
+                    b.Property<Guid?>("FarmerModelID")
                         .HasColumnType("uniqueidentifier");
 
                     b.Property<string>("Name")
@@ -323,19 +323,15 @@ namespace AngryEnergy_Test.Data.Migrations
 
             modelBuilder.Entity("AngryEnergy_Test.Models.ProductModel", b =>
                 {
-                    b.HasOne("AngryEnergy_Test.Models.FarmerModel", "FarmerModel")
+                    b.HasOne("AngryEnergy_Test.Models.FarmerModel", null)
                         .WithMany("Products")
-                        .HasForeignKey("FarmerModelID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("FarmerModelID");
 
                     b.HasOne("AngryEnergy_Test.Models.UserModel", "UserModel")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("FarmerModel");
 
                     b.Navigation("UserModel");
                 });

@@ -115,9 +115,7 @@ namespace AngryEnergy_Test.Controllers
         [HttpGet]
         public IActionResult Index(DateTime? startDate, DateTime? endDate, string category, string farmType)
         {
-            IQueryable<FarmerModel> farmers = _context.FarmersDbSet
-                    .Include(f => f.UserModel)
-                    .Include(f => f.Products);
+            IQueryable<FarmerModel> farmers = _context.FarmersDbSet.Include(f => f.UserModel);
 
             if (!string.IsNullOrEmpty(category))
             {

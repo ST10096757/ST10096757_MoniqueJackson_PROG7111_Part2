@@ -55,7 +55,6 @@
                     <th scope="col">Contact</th>
                     <th scope="col">Address</th>
                     <th scope="col">Farm Type</th>
-                    <th scope="col">Product Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -67,15 +66,6 @@
                         <td>@farmer.UserModel.Contact</td>
                         <td>@farmer.Address</td>
                         <td>@farmer.FarmType</td>
-                        <td>
-                            @foreach (var product in farmer.Products)
-                            {
-                                @product.Name
-                                @product.Category
-
-                                <br />
-                            }
-                        </td>
                     </tr>
                 }
             </tbody>
