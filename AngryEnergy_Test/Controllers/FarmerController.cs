@@ -113,9 +113,11 @@ namespace AngryEnergy_Test.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(string category, string farmType)
+        public IActionResult Index(DateTime? startDate, DateTime? endDate, string category, string farmType)
         {
-            IQueryable<FarmerModel> farmers = _context.FarmersDbSet.Include(f => f.UserModel);
+            IQueryable<FarmerModel> farmers = _context.FarmersDbSet
+                    .Include(f => f.UserModel)
+                    .Include(f => f.Products);
 
             if (!string.IsNullOrEmpty(category))
             {
@@ -162,11 +164,26 @@ namespace AngryEnergy_Test.Controllers
                 Selected = ft == farmType // Set selected item based on current farm type
             }).ToList();
 
+            IQueryable<ProductModel> products = _context.ProductsDbSet.Include(f => f.UserModel);
+
+            if (startDate.HasValue)
+            {
+                products = products.Where(p => p.ProductionDate >= startDate.Value);
+            }
+
+            if (endDate.HasValue)
+            {
+                products = products.Where(p => p.ProductionDate <= endDate.Value);
+            }
+
             // Pass the filter values and dropdown items to the view
             ViewBag.Category = category;
             ViewBag.Categories = categoryItems;
             ViewBag.FarmType = farmType;
             ViewBag.FarmTypes = farmTypeItems;
+
+            ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
+            ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
 
             var model = farmers.ToList();
 
@@ -174,3 +191,4 @@ namespace AngryEnergy_Test.Controllers
         }
     }
 }
+

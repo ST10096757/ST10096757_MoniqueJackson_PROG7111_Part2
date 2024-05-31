@@ -20,12 +20,25 @@
                         }
                     </select>
                 </div>
-            </div>
-            <div class="col-md-4">
-                <div class="form-group">
+                <div>
                     <label for="farmType">Farm Type:</label>
-                    <input type="text" id="farmType" name="farmType" value="@ViewBag.FarmType" class="form-control" />
+                    <select id="farmType" name="farmType" class="form-control">
+                        <option value="">All Farm Types</option>
+                        @foreach (var item in ViewBag.FarmTypes)
+                        {
+                            <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                        }
+                    </select>
                 </div>
+            </div>
+            
+            <div>
+                <label for="startDate">Start Date:</label>
+                <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" />
+            </div>
+            <div>
+                <label for="endDate">End Date:</label>
+                <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" />
             </div>
             <div class="col-md-4">
                 <button class="btn btn-success btn-block" type="submit">Filter</button>
@@ -42,6 +55,7 @@
                     <th scope="col">Contact</th>
                     <th scope="col">Address</th>
                     <th scope="col">Farm Type</th>
+                    <th scope="col">Product Name</th>
                 </tr>
             </thead>
             <tbody>
@@ -53,6 +67,15 @@
                         <td>@farmer.UserModel.Contact</td>
                         <td>@farmer.Address</td>
                         <td>@farmer.FarmType</td>
+                        <td>
+                            @foreach (var product in farmer.Products)
+                            {
+                                @product.Name
+                                @product.Category
+
+                                <br />
+                            }
+                        </td>
                     </tr>
                 }
             </tbody>

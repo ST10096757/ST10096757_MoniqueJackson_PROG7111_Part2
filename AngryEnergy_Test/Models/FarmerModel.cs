@@ -20,5 +20,8 @@ namespace AngryEnergy_Test.Models
 
         // Navigation property
         public virtual UserModel UserModel { get; set; }
+
+        // Navigation property to access associated products
+        public virtual ICollection<ProductModel> Products { get; set; }
     }
 }
