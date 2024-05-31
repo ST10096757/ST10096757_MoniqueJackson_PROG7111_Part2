@@ -1,0 +1,73 @@
+﻿@model List<AngryEnergy_Test.Models.ProductModel>
+
+@{
+    ViewData["Title"] = "View products";
+}
+
+<h1 class="text-center mb-4">Products</h1>
+
+<form method="get" asp-action="Index" class="mb-4">
+    <div class="row">
+        <div class="col-md-4">
+            <label for="startDate" class="form-label">Start Date:</label>
+            <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label for="endDate" class="form-label">End Date:</label>
+            <input type="date" id="endDate" name="endDate" value="@ViewBag.EndDate" class="form-control" />
+        </div>
+        <div class="col-md-4">
+            <label for="category" class="form-label">Category:</label>
+            <select id="category" name="category" class="form-select">
+                <option value="">All Categories</option>
+                @foreach (var item in ViewBag.Categories)
+                {
+                    <option value="@item.Value" selected="@item.Selected">@item.Text</option>
+                }
+            </select>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <div class="col d-flex justify-content-center">
+            <button type="submit" class=" w-20 btn btn-success btn-block mt-4">Filter</button>
+        </div>
+    </div>
+</form>
+
+<div class="row">
+    @foreach (var product in Model)
+    {
+        <div class="col-md-4 mb-4">
+            <div class="card h-100">
+                <img src="@Url.Content("~/path/to/image.jpg")" class="card-img-top" alt="Product Image">
+                <div class="card-body">
+                    <h5 class="card-title">@product.Name</h5>
+                    <p class="card-text">Category: @product.Category</p>
+                    <p class="card-text">Production Date: @product.ProductionDate.ToString("dd-MM-yyyy")</p>
+                    <a href="#" class="btn btn-primary">Read More...</a>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            $('.card').hover(
+                function () {
+                    $(this).css({
+                        'transform': 'scale(1.05)',
+                        'transition': 'all 0.3s ease'
+                    });
+                },
+                function () {
+                    $(this).css({
+                        'transform': 'scale(1)',
+                        'transition': 'all 0.3s ease'
+                    });
+                }
+            );
+        });
+    </script>
+}
