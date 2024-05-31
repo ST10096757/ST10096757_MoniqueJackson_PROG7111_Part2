@@ -86,9 +86,43 @@
     </div>
 </div>
 </div>
+<!-- Reset Button -->
+<div class="row mt-3">
+    <div class="text-center col-md-8 offset-md-2">
+        <button type="button" class=" w-20 btn btn-success" onclick="resetForm()">Continue</button>
+    </div>
+</div>
 
 @section Scripts {
     <script>
+        function resetForm() {
+            // Reset all input fields
+            document.getElementById("firstName").value = "";
+            document.getElementById("lastName").value = "";
+            document.getElementById("email").value = "";
+            document.getElementById("contact").value = "";
+            document.getElementById("address").value = "";
+            document.getElementById("farmType").value = "";
+            document.getElementById("tempPassword").value = "";
+
+            // Enable all input fields
+            // document.getElementById("firstName").disabled = false;
+            // document.getElementById("lastName").disabled = false;
+            // document.getElementById("email").disabled = false;
+            // document.getElementById("contact").disabled = false;
+            // document.getElementById("address").disabled = false;
+            // document.getElementById("farmType").disabled = false;
+        }
+        // function disableFields() {
+        //     // Disable input fields after submission
+        //     document.getElementById("firstName").disabled = true;
+        //     document.getElementById("lastName").disabled = true;
+        //     document.getElementById("email").disabled = true;
+        //     document.getElementById("contact").disabled = true;
+        //     document.getElementById("address").disabled = true;
+        //     document.getElementById("farmType").disabled = true;
+        // }
+
         function copyToClipboard() {
             var tempPassword = document.getElementById("tempPassword");
             tempPassword.select();

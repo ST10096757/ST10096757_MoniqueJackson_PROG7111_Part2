@@ -4,8 +4,9 @@
     ViewData["Title"] = "Home Page";
 }
 
+<body class="homeBackground-image">
 <div class="container text-center specific-view-background">
-    <h1 class="display-4">Welcome</h1>
+        <h1 class="display-4" style="font-weight: bold;">Welcome</h1>
 </div>
 
 <div class="container mt-5">
@@ -38,7 +39,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Marketplace</h5>
                         <p class="card-text">Explore the marketplace for available products.</p>
-                        <a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">Marketplace</a>
+                        <a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">View Marketplace</a>
                     </div>
                 </div>
             </div>
@@ -48,7 +49,7 @@
                     <div class="card-body text-center">
                         <h5 class="card-title">Farm Hub</h5>
                         <p class="card-text">Explore interactive forums and discussion boards.</p>
-                        <a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">Farm Hub</a>
+                        <a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">View Farm Hub</a>
                     </div>
                 </div>
             </div>
@@ -79,6 +80,16 @@
                 <div class="card">
                     <img src="marketplace_image.jpg" class="card-img-top" alt="Marketplace Image">
                     <div class="card-body text-center">
+                        <h5 class="card-title">Marketplace</h5>
+                        <p class="card-text">Explore the marketplace for available products.</p>
+                        <a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">View Marketplace</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4 mb-4">
+                <div class="card">
+                    <img src="marketplace_image.jpg" class="card-img-top" alt="Marketplace Image">
+                    <div class="card-body text-center">
                         <h5 class="card-title">Farm Hub</h5>
                         <p class="card-text">Explore interactive forums and discussion boards.</p>
                         <a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">Farm Hub</a>
@@ -88,4 +99,4 @@
         }
     </div>
 </div>
-
+</body>
