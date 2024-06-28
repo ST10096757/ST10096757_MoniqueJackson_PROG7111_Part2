@@ -38,9 +38,15 @@ namespace AngryEnergy_Test.Controllers
         [HttpGet]
         public IActionResult Index(DateTime? startDate, DateTime? endDate, string category)
         {
-            var products = _context.ProductsDbSet.AsQueryable();
+			// Get the current user's UserId
+			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
-            if (startDate.HasValue)
+			// Query to get products for the logged-in user
+			var products = _context.ProductsDbSet
+								   .Where(p => p.UserID == userId)
+								   .AsQueryable();
+
+			if (startDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate >= startDate.Value);
             }
@@ -90,11 +96,23 @@ namespace AngryEnergy_Test.Controllers
         {
 			// Retrieve the current user's UserId
 			var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
+			
+            // Retrieve the FarmerId associated with the current user
+			var farmer = await _context.FarmersDbSet
+				.FirstOrDefaultAsync(f => f.UserID == userId);
+
+			if (farmer == null)
+			{
+				// Handle the case where no farmer is found for the user
+				ModelState.AddModelError("", "No farmer details found for the current user.");
+				return View(product); // Return the view with the product to show errors
+			}
 
 			// Create a new ProductModel instance
 			var newProduct = new ProductModel()
 			{
 				Id = Guid.NewGuid(),
+				FarmerId = farmer.ID,
 				UserID = userId, // Assign the UserId
 				Name = product.Name,
 				Category = product.Category,
@@ -107,7 +125,18 @@ namespace AngryEnergy_Test.Controllers
 
 			return RedirectToAction("Add");
 		}
-
-    }
+		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+		[HttpGet]
+		public IActionResult Education()
+		{
+			return View();
+		}
+		//-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------//
+		[HttpGet]
+		public IActionResult Funding()
+		{
+			return View();
+		}
+	}
 }
     

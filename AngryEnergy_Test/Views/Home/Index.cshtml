@@ -1,103 +1,123 @@
 ﻿@using Microsoft.AspNetCore.Identity
 
 @{
-    ViewData["Title"] = "Home Page";
+	ViewData["Title"] = "Home Page";
 }
 
 <body class="homeBackground-image">
-    <div class="container text-center specific-view-background">
-        <img src="../logo.png" >
-        <h1 class="display-4" style="font-weight: bold;">Welcome</h1>
-</div>
+	<div class="container text-center specific-view-background">
+		<img src="../logo.png">
+		<h1 class="display-4" style="font-weight: bold;">Welcome</h1>
+	</div>
 
-<div class="container mt-5">
-    <div class="row justify-content-center">
-        @if (User.IsInRole("Employee"))
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                        <img src="../farmer.png" class="card-img-top" alt="Farmer Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Add Farmer</h5>
-                        <p class="card-text">Add a new farmer to the system.</p>
-                        <a href="@Url.Action("Add", "Farmer")" class="btn btn-success">Add Farmer</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                        <img src="../farmergroup.png" class="card-img-top" alt="Farmers Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">View Farmers</h5>
-                        <p class="card-text">View existing farmers in the system.</p>
-                        <a href="@Url.Action("Index", "Farmer")" class="btn btn-success">View Farmers</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                        <img src="../market.png" class="card-img-top" alt="Marketplace Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Marketplace</h5>
-                        <p class="card-text">Explore the marketplace for available products.</p>
-                        <a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">View Marketplace</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                        <img src="../hub.png" class="card-img-top" alt="FarmHUb Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Farm Hub</h5>
-                        <p class="card-text">Explore interactive forums and discussion boards.</p>
-                        <a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">View Farm Hub</a>
-                    </div>
-                </div>
-            </div>
-        }
-        @if (User.IsInRole("Farmer"))
-        {
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                        <img src="../tractor.png" class="card-img-top" alt="Product Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">Add Product</h5>
-                        <p class="card-text">Add a new product to your inventory.</p>
-                        <a href="@Url.Action("Add", "Product")" class="btn btn-success">Add Product</a>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4 mb-4">
-                <div class="card">
-                        <img src="../tools.png" class="card-img-top" alt="Products Image">
-                    <div class="card-body text-center">
-                        <h5 class="card-title">View Products</h5>
-                        <p class="card-text">View your existing products.</p>
-                        <a href="@Url.Action("Index", "Product")" class="btn btn-success">View Products</a>
-                    </div>
-                </div>
-            </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="../market.png" class="card-img-top" alt="Marketplace Image">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Marketplace</h5>
-                            <p class="card-text">Explore the marketplace for available products.</p>
-                            <a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">View Marketplace</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-4">
-                    <div class="card">
-                        <img src="../hub.png" class="card-img-top" alt="FarmHUb Image">
-                        <div class="card-body text-center">
-                            <h5 class="card-title">Farm Hub</h5>
-                            <p class="card-text">Explore interactive forums and discussion boards.</p>
-                            <a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">View Farm Hub</a>
-                        </div>
-                    </div>
-                </div>
-        }
-    </div>
-</div>
+	<div class="container mt-5">
+		<div class="row justify-content-center">
+			@if (User.IsInRole("Employee"))
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../add farmer.jpeg" class="card-img-top" alt="Farmer Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Add Farmer</h5>
+							<p class="card-text">Add a new farmer to the system.</p>
+							<a href="@Url.Action("Add", "Farmer")" class="btn btn-success">Add Farmer</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../FarmerGroup.jpeg" class="card-img-top" alt="Farmers Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">View Farmers</h5>
+							<p class="card-text">View existing farmers in the system.</p>
+							<a href="@Url.Action("Index", "Farmer")" class="btn btn-success">View Farmers</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../Market.jpeg" class="card-img-top" alt="Marketplace Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Marketplace</h5>
+							<p class="card-text">Explore the marketplace for available products.</p>
+							<a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">View Marketplace</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../hub.jpeg" class="card-img-top" alt="FarmHUb Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Farm Hub</h5>
+							<p class="card-text">Explore interactive forums and discussion boards.</p>
+							<a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">View Farm Hub</a>
+						</div>
+					</div>
+				</div>
+			}
+			@if (User.IsInRole("Farmer"))
+			{
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../tractor.jpeg" class="card-img-top" alt="Product Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Add Product</h5>
+							<p class="card-text">Add a new product to your inventory.</p>
+							<a href="@Url.Action("Add", "Product")" class="btn btn-success">Add Product</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../Tools.jpeg" class="card-img-top" alt="Products Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">View Products</h5>
+							<p class="card-text">View your existing products.</p>
+							<a href="@Url.Action("Index", "Product")" class="btn btn-success">View Products</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../market.jpeg" class="card-img-top" alt="Marketplace Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Marketplace</h5>
+							<p class="card-text">Explore the marketplace for available products.</p>
+							<a href="@Url.Action("Index", "Marketplace")" class="btn btn-success">View Marketplace</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img src="../Hub.jpeg" class="card-img-top" alt="FarmHUb Image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Farm Hub</h5>
+							<p class="card-text">Explore interactive forums and discussion boards.</p>
+							<a href="@Url.Action("Index", "FarmHub")" class="btn btn-success">View Farm Hub</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img class="card-img-top" src="../education.jpeg" alt="image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Educational Resources</h5>
+							<p class="card-text"> Learn how to integrate green energy technologies.</p>
+							<a href="@Url.Action("Education", "Product")" class="btn btn-success">View Resources</a>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-4 mb-4">
+					<div class="card">
+						<img class="card-img-top" src="~/funding.jpeg" alt="image">
+						<div class="card-body text-center">
+							<h5 class="card-title">Collaboration and Funding Opportunities</h5>
+							<p class="card-text">Collaboration and Funding Opportunities for farmers</p>
+							<a href="@Url.Action("Funding", "Product")" class="btn btn-success">View Opportunities</a>
+						</div>
+					</div>
+				</div>
+			}
+		</div>
+	</div>
 </body>

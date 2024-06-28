@@ -98,7 +98,7 @@ namespace AngryEnergy_Test
             });
 
 
-            SeedRolesAsync(roleManager).Wait();
+            //SeedRolesAsync(roleManager).Wait();
 		}
 
 		//I have no idea if this is good practice or not

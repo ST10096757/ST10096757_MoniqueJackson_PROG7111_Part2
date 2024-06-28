@@ -38,29 +38,23 @@ namespace AngryEnergy_Test.Controllers
                     return NotFound();
                 }
 
-                // Generate a password reset token
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-                // Reset the user's password
-                var result = await _userManager.ResetPasswordAsync(user, token, password);
+                // Attempt to reset password
+                var result = await _userManager.ResetPasswordAsync(user, await _userManager.GeneratePasswordResetTokenAsync(user), password);
                 if (result.Succeeded)
                 {
-                    // Password added successfully
-                    // You may choose to sign in the user after setting the password, if required
-                    // For example:
-                    // await _signInManager.SignInAsync(user, isPersistent: false);
-                    return RedirectToAction("Index", "Home"); // Redirect to a success page
+                    // Password reset successful
+                    return RedirectToAction("Index", "Home"); // Redirect to success page
                 }
                 else
                 {
-                    // If there are errors, add them to ModelState and return the view with errors
+                    // Add errors to TempData to display in the view
                     foreach (var error in result.Errors)
                     {
-                        ModelState.AddModelError(string.Empty, error.Description);
+                        TempData["ErrorMessage"] += error.Description + " ";
                     }
-                    return View();
                 }
             }
+
 
             // If ModelState is not valid, return the view with errors
             return View();

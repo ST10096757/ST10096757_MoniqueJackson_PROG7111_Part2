@@ -115,6 +115,13 @@ namespace AngryEnergy_Test.Areas.Identity.Pages.Account
                 // Get the user by email
                 var user = await _userManager.FindByEmailAsync(Input.Email);
 
+                if (user == null)
+                {
+                    // Error handling if user does not exist 
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return Page();
+                }
+
                 // Check if user exists and needs password reset (temporary password)
                 var passwordResetInfo = await NeedsPasswordReset(user);
                 if (passwordResetInfo.NeedsPasswordChange)

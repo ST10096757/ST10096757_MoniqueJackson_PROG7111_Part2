@@ -70,15 +70,8 @@ namespace AngryEnergy_Test.Controllers
                         // No need to set FirstName, LastName, and Contact on user here (already set in UserModel)
                         TempData["TempPassword"] = temporaryPassword;
 
-
-
-
                         // Assign the user to the role
                         await _userManager.AddToRoleAsync(user, "Farmer");
-
-
-
-
 
                         // Add Farmer to the database
                         _context.FarmersDbSet.Add(farmerUser);
@@ -113,57 +106,13 @@ namespace AngryEnergy_Test.Controllers
         }
 
         [HttpGet]
-        public IActionResult Index(DateTime? startDate, DateTime? endDate, string category, string farmType)
+        public async Task<IActionResult> Index(DateTime? startDate, DateTime? endDate, string category, string farmType)
         {
-            IQueryable<FarmerModel> farmers = _context.FarmersDbSet.Include(f => f.UserModel);
-
-            if (!string.IsNullOrEmpty(category))
-            {
-                // Join FarmerModel with ProductModel based on UserID
-                farmers = farmers.Join(_context.ProductsDbSet,
-                                        farmer => farmer.UserID,
-                                        product => product.UserID,
-                                        (farmer, product) => new { Farmer = farmer, Product = product })
-                                 .Where(fp => fp.Product.Category == category)
-                                 .Select(fp => fp.Farmer)
-                                 .Distinct();
-            }
-
-            if (!string.IsNullOrEmpty(farmType))
-            {
-                farmers = farmers.Where(f => f.FarmType == farmType);
-            }
-
-            // Get unique categories
-            var categories = _context.ProductsDbSet
-                                     .Select(p => p.Category)
-                                     .Distinct()
-                                     .ToList();
-
-            // Create a list of SelectListItem objects for categories
-            var categoryItems = categories.Select(c => new SelectListItem
-            {
-                Text = c,
-                Value = c,
-                Selected = c == category // Set selected item based on current category
-            }).ToList();
-
-            // Get unique farm types
-            var farmTypes = _context.FarmersDbSet
-                                 .Select(f => f.FarmType)
-                                 .Distinct()
-                                 .ToList();
-
-            // Create a list of SelectListItem objects for farm types
-            var farmTypeItems = farmTypes.Select(ft => new SelectListItem
-            {
-                Text = ft,
-                Value = ft,
-                Selected = ft == farmType // Set selected item based on current farm type
-            }).ToList();
-
-            IQueryable<ProductModel> products = _context.ProductsDbSet.Include(f => f.UserModel);
-
+           // Query to get products for the logged-in user
+            IQueryable<ProductModel> products = _context.ProductsDbSet
+                                                   .Include(p => p.UserModel)
+                                                   .Include(p => p.FarmerModel);
+            // Apply filters
             if (startDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate >= startDate.Value);
@@ -174,6 +123,45 @@ namespace AngryEnergy_Test.Controllers
                 products = products.Where(p => p.ProductionDate <= endDate.Value);
             }
 
+            if (!string.IsNullOrEmpty(category))
+            {
+                products = products.Where(p => p.Category == category);
+            }
+
+            if (!string.IsNullOrEmpty(farmType))
+            {
+                products = products.Where(p => p.FarmerModel.FarmType == farmType);
+            }
+
+            // Get unique categories for the current user's products
+            var categories = await _context.ProductsDbSet
+                                           .Select(p => p.Category)
+                                           .Distinct()
+                                           .ToListAsync();
+
+            // Create a list of SelectListItem objects for categories
+            var categoryItems = categories.Select(c => new SelectListItem
+            {
+                Text = c,
+                Value = c,
+                Selected = c == category // Set selected item based on current category
+            }).ToList();
+
+            // Get unique farm types for the current user's products
+            var farmTypes = await _context.FarmersDbSet
+                                          .Select(f => f.FarmType)
+                                          .Distinct()
+                                          .ToListAsync();
+
+            // Create a list of SelectListItem objects for farm types
+            var farmTypeItems = farmTypes.Select(ft => new SelectListItem
+            {
+                Text = ft,
+                Value = ft,
+                Selected = ft == farmType // Set selected item based on current farm type
+            }).ToList();
+
+
             // Pass the filter values and dropdown items to the view
             ViewBag.Category = category;
             ViewBag.Categories = categoryItems;
@@ -183,7 +171,7 @@ namespace AngryEnergy_Test.Controllers
             ViewBag.StartDate = startDate?.ToString("yyyy-MM-dd");
             ViewBag.EndDate = endDate?.ToString("yyyy-MM-dd");
 
-            var model = farmers.ToList();
+            var model = await products.ToListAsync();
 
             return View(model);
         }

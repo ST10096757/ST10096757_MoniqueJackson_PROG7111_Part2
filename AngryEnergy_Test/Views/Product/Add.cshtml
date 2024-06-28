@@ -4,50 +4,55 @@
     ViewData["Title"] = "Add a new product";
 }
 
-<div class="container">
-    <h1 class="text-center">Add a New Product</h1>
+<br/>
 
-    <form method="post" action="Add">
-        <div class="row mt-3">
-            <div class="col-md-4 offset-md-4">
-                <div class="form-group">
-                    <label for="productName" class="form-label">Product Name</label>
-                    <input type="text" class="form-control" id="productName" asp-for="Name" placeholder="Enter product name" />
-                </div>
-            </div>
-        </div>
+<div class="card container">
+	<br />
+	<h1 class="text-center">Add a New Product</h1>
+
+	<form method="post" action="Add">
+		<div class="row mt-3">
+			<div class="col-md-4 offset-md-4">
+				<div class="form-group">
+					<label for="productName" class="form-label">Product Name</label>
+					<input type="text" class="form-control" id="productName" asp-for="Name" placeholder="Enter product name" />
+				</div>
+			</div>
+		</div>
 
 
-        <div class="row mt-3">
-            <div class="col-md-4 offset-md-4">
-                <div class="form-group">
-            <label for="categorySelect" class="form-label">Category</label>
-            <select class="form-select" id="categorySelect" name="Category">
-                <option value="">Select a category</option>
-                <option value="Renewable Energy Sources">Renewable Energy Sources</option>
-                <option value="Energy-efficient Equipment">Energy-efficient Equipment</option>
-                <option value="Organic Farming Inputs">Organic Farming Inputs</option>
-                <option value="Sustainable Crop Cultivation">Sustainable Crop Cultivation</option>
-                <option value="Waste Reduction and Recycling">Waste Reduction and Recycling</option>
-            </select>
-                </div>
-            </div>
-        </div>
+		<div class="row mt-3">
+			<div class="col-md-4 offset-md-4">
+				<div class="form-group">
+					<label for="categorySelect" class="form-label">Category</label>
+					<select class="form-select" id="categorySelect" name="Category">
+						<option value="">Select a category</option>
+						<option value="Renewable Energy Sources">Renewable Energy Sources</option>
+						<option value="Energy-efficient Equipment">Energy-efficient Equipment</option>
+						<option value="Organic Farming Inputs">Organic Farming Inputs</option>
+						<option value="Sustainable Crop Cultivation">Sustainable Crop Cultivation</option>
+						<option value="Waste Reduction and Recycling">Waste Reduction and Recycling</option>
+					</select>
+				</div>
+			</div>
+		</div>
 
-        <div class="row mt-3">
-            <div class="col-md-4 offset-md-4">
-                <div class="form-group">
-            <label for="productionDate" class="form-label">Production Date</label>
-            <input type="date" class="form-control" id="productionDate" asp-for="ProductionDate" />
-                </div>
-            </div>
-        </div>
+		<div class="row mt-3">
+			<div class="col-md-4 offset-md-4">
+				<div class="form-group">
+					<label for="productionDate" class="form-label">Production Date</label>
+					<input type="date" class="form-control" id="productionDate" asp-for="ProductionDate" />
+				</div>
+			</div>
+		</div>
 
-        <div class="row mt-3">
-            <div class="col d-flex justify-content-center">
-                <button type="submit" class=" w-25 btn btn-success btn-block mt-4">Add Product</button>
-            </div>
-        </div>
-
-    </form>
+		<div class="row mt-3">
+			<div class="col d-flex justify-content-center">
+				<button type="submit" class=" w-25 btn btn-success btn-block mt-4">Add Product</button>
+			</div>
+		</div>
+		<br />
+	</form>
 </div>
+
+<br />

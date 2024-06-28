@@ -1,10 +1,10 @@
-﻿@model IEnumerable<FarmerModel>
+﻿@model IEnumerable<ProductModel>
 
 @{
     ViewData["Title"] = "Farmers";
 }
 
-<div class="container">
+<div class="card container">
     <h1 class="mt-5 mb-4">Filter Farmers</h1>
 
     <form method="get" asp-action="Index" class="mb-4">
@@ -31,7 +31,6 @@
                     </select>
                 </div>
             </div>
-            
             <div>
                 <label for="startDate">Start Date:</label>
                 <input type="date" id="startDate" name="startDate" value="@ViewBag.StartDate" />
@@ -46,10 +45,15 @@
         </div>
     </form>
 
+    <br />
+
     <div class="table-responsive">
-        <table class="table table-striped">
+        <table class="table table-striped table-light">
             <thead class="thead-dark">
                 <tr>
+                    <th scope="col">Product Name</th>
+                    <th scope="col">Production Date</th>
+                    <th scope="col">Category</th>
                     <th scope="col">First Name</th>
                     <th scope="col">Last Name</th>
                     <th scope="col">Contact</th>
@@ -58,14 +62,17 @@
                 </tr>
             </thead>
             <tbody>
-                @foreach (var farmer in Model)
+                @foreach (var product in Model)
                 {
                     <tr>
-                        <td>@farmer.UserModel.FirstName</td>
-                        <td>@farmer.UserModel.LastName</td>
-                        <td>@farmer.UserModel.Contact</td>
-                        <td>@farmer.Address</td>
-                        <td>@farmer.FarmType</td>
+                        <td>@product.Name</td>
+                        <td>@product.ProductionDate?.ToString("yyyy-MM-dd")</td>
+                        <td>@product.Category</td>
+                        <td>@product.UserModel?.FirstName</td>
+                        <td>@product.UserModel?.LastName</td>
+                        <td>@product.UserModel?.Contact</td>
+                        <td>@product.FarmerModel?.Address</td>
+                        <td>@product.FarmerModel?.FarmType</td>
                     </tr>
                 }
             </tbody>

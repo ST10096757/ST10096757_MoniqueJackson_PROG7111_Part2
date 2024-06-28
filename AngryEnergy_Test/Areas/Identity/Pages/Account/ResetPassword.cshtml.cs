@@ -106,6 +106,7 @@ namespace AngryEnergy_Test.Areas.Identity.Pages.Account
             {
                 return RedirectToPage("./ResetPasswordConfirmation");
             }
+           
 
             foreach (var error in result.Errors)
             {

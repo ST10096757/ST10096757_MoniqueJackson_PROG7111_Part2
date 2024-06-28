@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace AngryEnergy_Test.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240530203413_ProductModel")]
-    partial class ProductModel
+    [Migration("20240627204151_updatingSystem")]
+    partial class updatingSystem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -60,11 +60,14 @@ namespace AngryEnergy_Test.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<Guid>("FarmerId")
+                        .HasColumnType("uniqueidentifier");
+
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<DateTime>("ProductionDate")
+                    b.Property<DateTime?>("ProductionDate")
                         .HasColumnType("datetime2");
 
                     b.Property<string>("UserID")
@@ -72,6 +75,8 @@ namespace AngryEnergy_Test.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("FarmerId");
 
                     b.HasIndex("UserID");
 
@@ -318,11 +323,19 @@ namespace AngryEnergy_Test.Data.Migrations
 
             modelBuilder.Entity("AngryEnergy_Test.Models.ProductModel", b =>
                 {
+                    b.HasOne("AngryEnergy_Test.Models.FarmerModel", "FarmerModel")
+                        .WithMany("Products")
+                        .HasForeignKey("FarmerId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("AngryEnergy_Test.Models.UserModel", "UserModel")
                         .WithMany()
                         .HasForeignKey("UserID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("FarmerModel");
 
                     b.Navigation("UserModel");
                 });
@@ -376,6 +389,11 @@ namespace AngryEnergy_Test.Data.Migrations
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+                });
+
+            modelBuilder.Entity("AngryEnergy_Test.Models.FarmerModel", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("AngryEnergy_Test.Models.UserModel", b =>

@@ -15,7 +15,9 @@ html {
 
 body {
     margin-bottom: 60px;
-   
+    background-image: url('../Background.png');
+    background-size: cover;
+    background-position: center;
 }
 
 .background-image {
@@ -25,10 +27,19 @@ body {
 }
 
 .homeBackground-image {
-    background-image: url('../backhome.jpeg');
+    height: 100%;
+    background-image: url('../BackHome.png');
     background-size: cover;
-    background-position: center;
+    background-repeat: no-repeat;
 }
 
+.card {
+    box-shadow: 0px 2px 16px rgba(0,0,0,0.7);
+}
+
+    .card-img-top {
+        width: 100%;
+        height: stretch;
+    }
    
 
