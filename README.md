@@ -134,8 +134,8 @@ On the Home Screen, they are presented with options for functions:
 				- Farm Type
 	
 	Once all of those areas are satisfied, the User selects the SUBMIT button.
-	This button generates a Temporary Password for the Farmer (more on this below) that should be copied for the Farmer to use later.
-	The user then select the CONTINUE button which clears all fields to add another Farmer user.
+	Farmer can make up a temporary password later.
+	The user then select the RESET button which clears all fields to add another Farmer user.
 	Should the user not want to create another Farmer user, they select the HOME link at the top left of the screen.
 
 
@@ -166,7 +166,7 @@ Upon creation, the Farmer is given a temporary password that needed to be copied
 
 		When the Farmer gets to the LOGIN interface, they need to enter:
 				- email
-				- temporary password
+				- made up temporary password
 
 		Once they select the LOG IN button, they will be redirected to the RESET PASSWORD interface.
 
